@@ -4,7 +4,6 @@ args4j
 <p align="center">
   <img src="https://github.com/while-loop/args4j/blob/master/resources/gopherwalk.png">
   <br><br><br>
-  <a href="https://godoc.org/github.com/while-loop/args4j/walk"><img src="https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square"></a>
   <a href="https://travis-ci.org/while-loop/args4j"><img src="https://img.shields.io/travis/while-loop/args4j.svg?style=flat-square"></a>
   <a href="https://github.com/while-loop/args4j/releases"><img src="https://img.shields.io/github/release/while-loop/args4j.svg?style=flat-square"></a>
   <a href="https://coveralls.io/github/while-loop/args4j"><img src="https://img.shields.io/coveralls/while-loop/args4j.svg?style=flat-square"></a>
