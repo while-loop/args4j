@@ -40,23 +40,42 @@ public class Parser {
 
     public void printHelp() {
         Program program = _instance.getClass().getAnnotation(Program.class);
-        if (program != null){
+        if (program != null) {
             System.out.printf("Usage: %s %s%n", program.name(), program.usage());
         }
 
         System.out.println("Options:");
         for (Field f : _fields) {
             Option option = f.getAnnotation(Option.class);
-            System.out.printf(" %s%s, %s%s\t%s%n", OptionParser.SHORT_SEP, option.shortOpt(),
+            boolean accessible = f.isAccessible();
+            if (!accessible) {
+                f.setAccessible(true);
+            }
+
+            System.out.printf(" %s%s, %s%s\t%s", OptionParser.SHORT_SEP, option.shortOpt(),
                     OptionParser.LONG_SEP, option.longOpt(),
                     option.desc());
+
+            try {
+                String def = getValue(option, null);
+                if (def != null && !def.equals("null")) {
+                    System.out.printf("\t(default: %s)", f.get(_instance));
+                }
+                System.out.println();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } finally {
+                f.setAccessible(accessible);
+            }
+
         }
         System.out.println();
     }
 
     public void parse(String[] args) {
-        this._shorts = OptionParser.parseShortOpts(_fields, args);
-        this._longs = OptionParser.parseLongOpts(_fields, args);
+        OptionParser op = new OptionParser(_fields, args);
+        this._shorts = op.parseShortOpts();
+        this._longs = op.parseLongOpts();
 
         printHelp();
         if (this._shorts.containsKey("h") || this._longs.containsKey("help")) {
