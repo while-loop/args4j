@@ -15,7 +15,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class getConvertClass() {
+        public Class<String> getConvertClass() {
             return String.class;
         }
     };
@@ -27,7 +27,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class getConvertClass() {
+        public Class<Integer> getConvertClass() {
             return Integer.class;
         }
     };
@@ -39,7 +39,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class getConvertClass() {
+        public Class<Short> getConvertClass() {
             return Short.class;
         }
     };
@@ -51,7 +51,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class getConvertClass() {
+        public Class<Double> getConvertClass() {
             return Double.class;
         }
     };
@@ -63,7 +63,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class getConvertClass() {
+        public Class<Boolean> getConvertClass() {
             return Boolean.class;
         }
     };
@@ -75,7 +75,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class getConvertClass() {
+        public Class<Long> getConvertClass() {
             return Long.class;
         }
     };
@@ -87,7 +87,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class getConvertClass() {
+        public Class<Character> getConvertClass() {
             return Character.class;
         }
     };
@@ -99,7 +99,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class getConvertClass() {
+        public Class<Float> getConvertClass() {
             return Float.class;
         }
     };
@@ -111,7 +111,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class getConvertClass() {
+        public Class<Byte> getConvertClass() {
             return Byte.class;
         }
     };

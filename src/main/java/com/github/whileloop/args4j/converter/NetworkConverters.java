@@ -30,7 +30,7 @@ public final class NetworkConverters {
         }
 
         @Override
-        public Class getConvertClass() {
+        public Class<InetSocketAddress> getConvertClass() {
             return InetSocketAddress.class;
         }
     };
