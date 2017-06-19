@@ -13,13 +13,19 @@ import java.util.stream.Collectors;
 public class Test {
 
     @Option(longOpt = "iface", shortOpt = "i", required = true, desc = "interface to listen on")
-    private String iface = "eth1";
+    private static String iface = "eth1";
 
     @Option(longOpt = "outFile", shortOpt = "o", desc = "log output file")
-    private File outFile;
+    private  File outFile;
 
     public static void main(String[] args) {
-        new Test().run(args);
+        Test t = new Test();
+        
+        Parser.parseArgs(t, args); // static fields
+        new Test().run(args); // non-static fields
+
+        System.out.println(iface);
+        System.out.println(t.outFile);
 
     }
 

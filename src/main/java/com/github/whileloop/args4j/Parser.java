@@ -77,7 +77,6 @@ public class Parser {
         this._shorts = op.parseShortOpts();
         this._longs = op.parseLongOpts();
 
-        printHelp();
         if (this._shorts.containsKey("h") || this._longs.containsKey("help")) {
             printHelp();
             if (_exit) {

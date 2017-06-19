@@ -40,6 +40,7 @@ class OptionParser {
                 }
             } else if (_args[i].length() == 2 && (i + 1 < _args.length) && !_args[i + 1].startsWith(SHORT_SEP)) {
                 // single option with maybe field
+                // it's a flag if the wanting field is a boolean
                 char opt = _args[i].charAt(1);
                 Optional<Field> f = getFieldByShort(String.valueOf(opt));
                 if (!f.isPresent()) {
