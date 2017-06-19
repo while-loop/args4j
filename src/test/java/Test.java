@@ -20,9 +20,9 @@ public class Test {
 
     public static void main(String[] args) {
         Test t = new Test();
-        
-        Parser.parseArgs(t, args); // static fields
-        new Test().run(args); // non-static fields
+
+        Parser.parseArgs(Test.class, args); // static fields
+        t.run(args); // non-static fields
 
         System.out.println(iface);
         System.out.println(t.outFile);
@@ -51,8 +51,6 @@ public class Test {
                 })
                 .build();
         p.parse(args);
-        // or
-        Parser.parseArgs(this, args);
 
         System.out.println(this.iface);
         System.out.println(this.outFile);

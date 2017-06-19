@@ -19,6 +19,20 @@ public class Parser {
     private Field[] _fields;
     private boolean _exit = true;
 
+    /**
+     * Parse a class' static member fields
+     * @param clazz
+     * @param converters
+     */
+    public Parser(Class clazz, List<Converter> converters) throws IllegalAccessException, InstantiationException {
+        this(clazz.newInstance(), converters);
+    }
+
+    /**
+     * Parse an instance's static and non-static member fields
+     * @param instance
+     * @param converters
+     */
     public Parser(Object instance, List<Converter> converters) {
         this._instance = instance;
         this._shorts = new HashMap<>();
