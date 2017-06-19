@@ -18,7 +18,8 @@ public class OptionParserTest {
         Map<String, String> expected = new HashMap<>();
         expected.put("v", null);
         expected.put("6", null);
-        expected.put("i", "eth1");
+        expected.put("r", null);
+        expected.put("i", "eth0");
 
         class yolo {
             @Option(longOpt = "verbose", shortOpt = "v")
@@ -27,13 +28,16 @@ public class OptionParserTest {
             @Option(longOpt = "ipv6", shortOpt = "6")
             boolean ipv6;
 
+            @Option(longOpt = "reconnect", shortOpt = "r")
+            boolean reconnect;
+
             @Option(longOpt = "iface", shortOpt = "i")
-            boolean iface;
+            String iface = "lo";
         }
 
         OptionParser op = new OptionParser(Arrays.stream(new yolo().getClass().getDeclaredFields())
                 .filter(f -> f.isAnnotationPresent(Option.class))
-                .toArray(Field[]::new), "-vr6 --fakeer=no --fake-long test".split(" "));
+                .toArray(Field[]::new), "-vr6 --fakeer=no -i eth0 --fake-long test".split(" "));
 
         Map<String, String> actual = op.parseShortOpts();
         assertNotNull(actual);

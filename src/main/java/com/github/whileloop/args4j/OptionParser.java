@@ -23,7 +23,7 @@ class OptionParser {
     Map<String, String> parseShortOpts() {
         Map<String, String> opts = new HashMap<>();
         for (int i = 0; i < _args.length; i++) {
-            if (!_args[i].startsWith(SHORT_SEP)) {
+            if (!_args[i].startsWith(SHORT_SEP) || _args[i].startsWith(LONG_SEP)) {
                 continue;
             }
 
