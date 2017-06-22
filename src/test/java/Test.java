@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
         usage = "[options...] command")
 public class Test {
 
-    @Option(longOpt = "iface", shortOpt = "i", required = true, desc = "interface to listen on")
+    @Option(longOpt = "iface", shortOpt = 'i', required = true, desc = "interface to listen on")
     private static String iface = "eth1";
 
-    @Option(longOpt = "outFile", shortOpt = "o", desc = "log output file")
+    @Option(longOpt = "outFile", shortOpt = 'o', desc = "log output file")
     private  File outFile;
 
     public static void main(String[] args) {

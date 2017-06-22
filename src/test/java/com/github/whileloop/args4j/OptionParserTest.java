@@ -22,16 +22,16 @@ public class OptionParserTest {
         expected.put("i", "eth0");
 
         class yolo {
-            @Option(longOpt = "verbose", shortOpt = "v")
+            @Option(longOpt = "verbose", shortOpt = 'v')
             boolean verbose;
 
-            @Option(longOpt = "ipv6", shortOpt = "6")
+            @Option(longOpt = "ipv6", shortOpt = '6')
             boolean ipv6;
 
-            @Option(longOpt = "reconnect", shortOpt = "r")
+            @Option(longOpt = "reconnect", shortOpt = 'r')
             boolean reconnect;
 
-            @Option(longOpt = "iface", shortOpt = "i")
+            @Option(longOpt = "iface", shortOpt = 'i')
             String iface = "lo";
         }
 
@@ -51,13 +51,13 @@ public class OptionParserTest {
     @Test
     public void getFieldByShort() throws Exception {
         class yolo {
-            @Option(longOpt = "verbose", shortOpt = "v")
+            @Option(longOpt = "verbose", shortOpt = 'v')
             boolean verbose;
         }
 
         OptionParser op = new OptionParser(Arrays.stream(new yolo().getClass().getDeclaredFields())
                 .filter(f -> f.isAnnotationPresent(Option.class))
-                .toArray(Field[]::new), "-vr6 --verbose".split(" "));
+                .toArray(Field[]::new), new String[]{});
 
         Optional<Field> f = op.getFieldByShort("v");
         assertTrue(f.isPresent());
@@ -68,13 +68,13 @@ public class OptionParserTest {
     @Test
     public void getFieldByLong() throws Exception {
         class yolo {
-            @Option(longOpt = "take-test", shortOpt = "no-opt")
+            @Option(longOpt = "take-test", shortOpt = 'n')
             boolean takeTest;
         }
 
         OptionParser op = new OptionParser(Arrays.stream(new yolo().getClass().getDeclaredFields())
                 .filter(f -> f.isAnnotationPresent(Option.class))
-                .toArray(Field[]::new), "-vr6 --take-test=no".split(" "));
+                .toArray(Field[]::new), new String[]{});
 
         Optional<Field> f = op.getFieldByLong("take-test");
         assertTrue(f.isPresent());

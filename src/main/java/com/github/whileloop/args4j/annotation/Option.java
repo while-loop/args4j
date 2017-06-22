@@ -17,7 +17,7 @@ public @interface Option {
     /**
      * short option denoted by "-"
      */
-    String shortOpt() default "";
+    char shortOpt() default 0;
 
     /**
      * long option denoted by "--"

@@ -9,8 +9,8 @@ public class StubOption implements Option {
     }
 
     @Override
-    public String shortOpt() {
-        return null;
+    public char shortOpt() {
+        return 0;
     }
 
     @Override

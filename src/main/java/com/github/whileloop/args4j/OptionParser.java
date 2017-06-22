@@ -41,15 +41,18 @@ class OptionParser {
             } else if (_args[i].length() == 2 && (i + 1 < _args.length) && !_args[i + 1].startsWith(SHORT_SEP)) {
                 // single option with maybe field
                 // it's a flag if the wanting field is a boolean
+
                 char opt = _args[i].charAt(1);
                 Optional<Field> f = getFieldByShort(String.valueOf(opt));
+
                 if (!f.isPresent()) {
                     System.err.printf("Unknown option %s%n", opt);
+                } else if (f.get().getType() == Boolean.class || f.get().getType() == boolean.class) {
+                    // just a short flag.. next arg is a program arg
+                    opts.put(String.valueOf(opt), null);
                 } else {
-                    if (f.get().getType() == Boolean.class || f.get().getType() == boolean.class) {
-                        // just a short flag.. next arg is a program arg
-                        opts.put(String.valueOf(opt), null);
-                    }
+                    // short opt with value
+                    opts.put(String.valueOf(opt), _args[i + 1]);
                 }
             } else if (_args[i].length() == 2 && (i + 1 < _args.length) && _args[i + 1].startsWith(SHORT_SEP)) {
                 // single flag with a flag as next arg
@@ -107,7 +110,7 @@ class OptionParser {
 
     Optional<Field> getFieldByShort(String s) {
         return Arrays.stream(_fields)
-                .filter((Field f) -> f.getAnnotation(Option.class).shortOpt().equals(s))
+                .filter((Field f) -> f.getAnnotation(Option.class).shortOpt() == s.charAt(0))
                 .findFirst();
     }
 

@@ -39,10 +39,20 @@ Usage
 -----
 
 ```java
+@Program(
+  name = "IFaceDump",
+  usage = "[options...] -i interface  "
+)
+public class IFaceDump {
+    @Option(shortOpt = 'i', longOpt = "iface", required = true)
+    private static String iface = null;
 
-public class Example {
+    @Option(shortOpt = 'v', longOpt = "verbose")
+    private static boolean verbose = false;
+
+
     public static void main(String[] args){
-      
+
     }
 }
 
@@ -50,21 +60,31 @@ public class Example {
 
 Running:
 ```bash
-java Example -vvv -i enp3s0 1.3.3.7
+java Example -v -i enp3s0 1.3.3.7
 ```
 
 Support
 -------
 
 ```bash
-java Example -vvv -i enp3s0 1.3.3.7
+java Example -i enp3s0 1.3.3.7
 java Example -vr6 --net=test_net -p 80
 ```
+
+Future features/TODO
+--------------------
+
+- multi char short opt
+- multi command support (i.e. -vvv for more verbose output)
+- sub commands (Extend Converter<> to handle your own sub command?)
+- custom short/long opt flags
+- custom longOpt opt/value separator
+
 
 Changelog
 ---------
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/) 
+The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [CHANGELOG.md](CHANGELOG.md)

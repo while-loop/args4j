@@ -15,6 +15,8 @@ public class Parser {
     private Object _instance;
     private Map<String, String> _shorts;
     private Map<String, String> _longs;
+
+    // TODO change from list to Map to be able to override converters
     private List<Converter> _converters;
     private Field[] _fields;
     private boolean _exit = true;
@@ -132,7 +134,6 @@ public class Parser {
     }
 
     private String getValue(Option op, Object defaultVal) {
-
         if (_shorts.containsKey(op.shortOpt())) {
             defaultVal = _shorts.get(op.shortOpt());
         }
