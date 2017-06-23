@@ -6,9 +6,11 @@ import com.github.whileloop.args4j.annotation.Program;
 import com.github.whileloop.args4j.converter.FileConverters;
 import com.github.whileloop.args4j.converter.MiscConverters;
 import com.github.whileloop.args4j.converter.PrimitiveConverters;
+import com.google.common.reflect.TypeToken;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
 import java.util.*;
 
 
@@ -99,7 +101,7 @@ public class Parser {
 
     private void setField(Field field) {
         Option op = field.getAnnotation(Option.class);
-        Class clazz = field.getType();
+        Type type = field.getGenericType();
 
         boolean accessible = field.isAccessible();
         // allow modification of private fields
@@ -111,14 +113,14 @@ public class Parser {
             String strVal = getValue(op, field.get(_instance));
             // String check is not needed because values are stored as Strings
 
-            Object converted = _converters.convert(clazz, strVal);
+            Object converted = _converters.convert(type, strVal);
             System.out.println("converted " + field + " " + converted);
             field.set(_instance, converted);
             System.out.println(field.get(_instance));
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (IllegalArgumentException e) {
-            System.err.println("accessing instance var from static Class");
+            System.err.println("accessing instance var from static Class: " + e.getMessage());
         } finally {
             // revert back to original accessible state
             field.setAccessible(accessible);

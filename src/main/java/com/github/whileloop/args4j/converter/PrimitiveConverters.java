@@ -4,6 +4,7 @@ package com.github.whileloop.args4j.converter;
 import com.github.whileloop.args4j.ConvertFactory;
 import com.github.whileloop.args4j.Converter;
 
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public final class PrimitiveConverters {
 
     static final Converter<String> STRING_CONVERTER = new Converter<String>() {
         @Override
-        public String convert(ConvertFactory factory, Class<String> enclosingClass, String value) {
+        public String convert(ConvertFactory factory, Type type, String value) {
             return value;
         }
 
@@ -23,7 +24,7 @@ public final class PrimitiveConverters {
 
     static final Converter<Integer> INTEGER_CONVERTER = new Converter<Integer>() {
         @Override
-        public Integer convert(ConvertFactory factory, Class<Integer> enclosingClass, String value) {
+        public Integer convert(ConvertFactory factory, Type type, String value) {
             return Integer.parseInt(value);
         }
 
@@ -35,7 +36,7 @@ public final class PrimitiveConverters {
 
     static final Converter<Short> SHORT_CONVERTER = new Converter<Short>() {
         @Override
-        public Short convert(ConvertFactory factory, Class<Short> enclosingClass, String value) {
+        public Short convert(ConvertFactory factory, Type type, String value) {
             return Short.parseShort(value);
         }
 
@@ -47,7 +48,7 @@ public final class PrimitiveConverters {
 
     static final Converter<Double> DOUBLE_CONVERTER = new Converter<Double>() {
         @Override
-        public Double convert(ConvertFactory factory, Class<Double> enclosingClass, String value) {
+        public Double convert(ConvertFactory factory, Type type, String value) {
             return Double.parseDouble(value);
         }
 
@@ -59,7 +60,7 @@ public final class PrimitiveConverters {
 
     static final Converter<Boolean> BOOLEAN_CONVERTER = new Converter<Boolean>() {
         @Override
-        public Boolean convert(ConvertFactory factory, Class<Boolean> enclosingClass, String value) {
+        public Boolean convert(ConvertFactory factory, Type type, String value) {
             return Boolean.parseBoolean(value) || (value != null && value.equals("1"));
         }
 
@@ -71,7 +72,7 @@ public final class PrimitiveConverters {
 
     static final Converter<Long> LONG_CONVERTER = new Converter<Long>() {
         @Override
-        public Long convert(ConvertFactory factory, Class<Long> enclosingClass, String value) {
+        public Long convert(ConvertFactory factory, Type type, String value) {
             return Long.parseLong(value);
         }
 
@@ -83,7 +84,7 @@ public final class PrimitiveConverters {
 
     static final Converter<Character> CHARACTER_CONVERTER = new Converter<Character>() {
         @Override
-        public Character convert(ConvertFactory factory, Class<Character> enclosingClass, String value) {
+        public Character convert(ConvertFactory factory, Type type, String value) {
             return value.charAt(0);
         }
 
@@ -95,7 +96,7 @@ public final class PrimitiveConverters {
 
     static final Converter<Float> FLOAT_CONVERTER = new Converter<Float>() {
         @Override
-        public Float convert(ConvertFactory factory, Class<Float> enclosingClass, String value) {
+        public Float convert(ConvertFactory factory, Type type, String value) {
             return Float.parseFloat(value);
         }
 
@@ -107,7 +108,7 @@ public final class PrimitiveConverters {
 
     static final Converter<Byte> BYTE_CONVERTER = new Converter<Byte>() {
         @Override
-        public Byte convert(ConvertFactory factory, Class<Byte> enclosingClass, String value) {
+        public Byte convert(ConvertFactory factory, Type type, String value) {
             return Byte.parseByte(value);
         }
 

@@ -6,14 +6,15 @@ import com.github.whileloop.args4j.annotation.Program;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 
-@Program(name = "Test",
+@Program(name = "Example",
         usage = "[options...] command")
-public class Test {
+public class Example {
 
     @Option(longOpt = "iface", shortOpt = 'i', required = true, desc = "interface to listen on")
     private static String iface = "eth1";
@@ -22,9 +23,9 @@ public class Test {
     private  File outFile;
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        Test t = new Test();
+        Example t = new Example();
 
-        Parser.parseArgs(Test.class, args); // static fields
+        Parser.parseArgs(Example.class, args); // static fields
         t.run(args); // non-static fields
 
         System.out.println(iface);
@@ -41,7 +42,7 @@ public class Test {
                      * @return
                      */
                     @Override
-                    public Map<String, Object> convert(ConvertFactory factory,Class<Map> enclosingClass, String value) {
+                    public Map<String, Object> convert(ConvertFactory factory, Type type, String value) {
                         return Arrays.stream(value.split(","))
                                 .map(s -> s.split(":"))
                                 .collect(Collectors.toMap(e -> e[0], e -> e[1]));

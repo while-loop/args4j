@@ -4,6 +4,7 @@ import com.github.whileloop.args4j.ConvertFactory;
 import com.github.whileloop.args4j.Converter;
 
 import java.io.File;
+import java.lang.reflect.Type;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -12,7 +13,7 @@ import java.util.List;
 public final class FileConverters {
     static final Converter<File> FILE_CONVERTER = new Converter<File>() {
         @Override
-        public File convert(ConvertFactory factory, Class<File> enclosingClass, String value) {
+        public File convert(ConvertFactory factory, Type type, String value) {
             return new File(value);
         }
 
@@ -24,7 +25,7 @@ public final class FileConverters {
 
     static final Converter<Path> PATH_CONVERTER = new Converter<Path>() {
         @Override
-        public Path convert(ConvertFactory factory, Class<Path> enclosingClass, String value) {
+        public Path convert(ConvertFactory factory, Type type, String value) {
             return Paths.get(value);
         }
 
