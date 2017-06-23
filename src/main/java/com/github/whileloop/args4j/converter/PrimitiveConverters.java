@@ -1,6 +1,7 @@
 package com.github.whileloop.args4j.converter;
 
 
+import com.github.whileloop.args4j.ConvertFactory;
 import com.github.whileloop.args4j.Converter;
 
 import java.util.Arrays;
@@ -10,109 +11,109 @@ public final class PrimitiveConverters {
 
     static final Converter<String> STRING_CONVERTER = new Converter<String>() {
         @Override
-        public String convert(String value) {
+        public String convert(ConvertFactory factory, Class<String> enclosingClass, String value) {
             return value;
         }
 
         @Override
-        public Class<String> getConvertClass() {
-            return String.class;
+        public Class[] getConvertClass() {
+            return new Class[]{String.class};
         }
     };
 
     static final Converter<Integer> INTEGER_CONVERTER = new Converter<Integer>() {
         @Override
-        public Integer convert(String value) {
+        public Integer convert(ConvertFactory factory, Class<Integer> enclosingClass, String value) {
             return Integer.parseInt(value);
         }
 
         @Override
-        public Class<Integer> getConvertClass() {
-            return Integer.class;
+        public Class[] getConvertClass() {
+            return new Class[]{Integer.class, int.class};
         }
     };
 
     static final Converter<Short> SHORT_CONVERTER = new Converter<Short>() {
         @Override
-        public Short convert(String value) {
+        public Short convert(ConvertFactory factory, Class<Short> enclosingClass, String value) {
             return Short.parseShort(value);
         }
 
         @Override
-        public Class<Short> getConvertClass() {
-            return Short.class;
+        public Class[] getConvertClass() {
+            return new Class[]{Short.class, short.class};
         }
     };
 
     static final Converter<Double> DOUBLE_CONVERTER = new Converter<Double>() {
         @Override
-        public Double convert(String value) {
+        public Double convert(ConvertFactory factory, Class<Double> enclosingClass, String value) {
             return Double.parseDouble(value);
         }
 
         @Override
-        public Class<Double> getConvertClass() {
-            return Double.class;
+        public Class[] getConvertClass() {
+            return new Class[]{double.class, Double.class};
         }
     };
 
     static final Converter<Boolean> BOOLEAN_CONVERTER = new Converter<Boolean>() {
         @Override
-        public Boolean convert(String value) {
+        public Boolean convert(ConvertFactory factory, Class<Boolean> enclosingClass, String value) {
             return Boolean.parseBoolean(value) || (value != null && value.equals("1"));
         }
 
         @Override
-        public Class<Boolean> getConvertClass() {
-            return Boolean.class;
+        public Class[] getConvertClass() {
+            return new Class[]{boolean.class, Boolean.class};
         }
     };
 
     static final Converter<Long> LONG_CONVERTER = new Converter<Long>() {
         @Override
-        public Long convert(String value) {
+        public Long convert(ConvertFactory factory, Class<Long> enclosingClass, String value) {
             return Long.parseLong(value);
         }
 
         @Override
-        public Class<Long> getConvertClass() {
-            return Long.class;
+        public Class[] getConvertClass() {
+            return new Class[]{Long.class, long.class};
         }
     };
 
     static final Converter<Character> CHARACTER_CONVERTER = new Converter<Character>() {
         @Override
-        public Character convert(String value) {
+        public Character convert(ConvertFactory factory, Class<Character> enclosingClass, String value) {
             return value.charAt(0);
         }
 
         @Override
-        public Class<Character> getConvertClass() {
-            return Character.class;
+        public Class[] getConvertClass() {
+            return new Class[]{Character.class, char.class};
         }
     };
 
     static final Converter<Float> FLOAT_CONVERTER = new Converter<Float>() {
         @Override
-        public Float convert(String value) {
+        public Float convert(ConvertFactory factory, Class<Float> enclosingClass, String value) {
             return Float.parseFloat(value);
         }
 
         @Override
-        public Class<Float> getConvertClass() {
-            return Float.class;
+        public Class[] getConvertClass() {
+            return new Class[]{float.class, Float.class};
         }
     };
 
     static final Converter<Byte> BYTE_CONVERTER = new Converter<Byte>() {
         @Override
-        public Byte convert(String value) {
+        public Byte convert(ConvertFactory factory, Class<Byte> enclosingClass, String value) {
             return Byte.parseByte(value);
         }
 
         @Override
-        public Class<Byte> getConvertClass() {
-            return Byte.class;
+        public Class[] getConvertClass() {
+            return new Class[]{byte.class, Byte.class};
         }
     };
 

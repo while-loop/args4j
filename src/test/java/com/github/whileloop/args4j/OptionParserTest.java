@@ -40,6 +40,7 @@ public class OptionParserTest {
                 .toArray(Field[]::new), "-vr6 --fakeer=no -i eth0 --fake-long test".split(" "));
 
         Map<String, String> actual = op.parseShortOpts();
+        System.out.println(actual);
         assertNotNull(actual);
         assertEquals(expected, actual);
     }

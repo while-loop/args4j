@@ -4,9 +4,11 @@ package com.github.whileloop.args4j;
 import com.github.whileloop.args4j.annotation.Option;
 import com.github.whileloop.args4j.annotation.Program;
 import com.github.whileloop.args4j.converter.FileConverters;
+import com.github.whileloop.args4j.converter.MiscConverters;
 import com.github.whileloop.args4j.converter.PrimitiveConverters;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 
@@ -17,39 +19,29 @@ public class Parser {
     private Map<String, String> _longs;
 
     // TODO change from list to Map to be able to override converters
-    private List<Converter> _converters;
+    private ConvertFactory _converters;
     private Field[] _fields;
     private boolean _exit = true;
 
     /**
-     * Parse a class' static member fields
-     * @param clazz
-     * @param converters
-     */
-    public Parser(Class clazz, List<Converter> converters) throws IllegalAccessException, InstantiationException {
-        this(clazz.newInstance(), converters);
-    }
-
-    /**
      * Parse an instance's static and non-static member fields
+     *
      * @param instance
-     * @param converters
      */
-    public Parser(Object instance, List<Converter> converters) {
+    public Parser(Object instance) {
         this._instance = instance;
         this._shorts = new HashMap<>();
         this._longs = new HashMap<>();
         this._longs = new HashMap<>();
 
-        this._converters = new ArrayList<>();
+        this._converters = new ConvertFactory();
         this._converters.addAll(PrimitiveConverters.PRIMITIVE_CONVERTERS);
         this._converters.addAll(FileConverters.FILE_CONVERTERS);
+        this._converters.addAll(MiscConverters.MISC_CONVERTERS);
 
-        if (converters != null) {
-            this._converters.addAll(converters);
-        }
+        Class clazz = (this._instance instanceof Class) ? (Class) this._instance : this._instance.getClass();
 
-        this._fields = Arrays.stream(_instance.getClass().getDeclaredFields())
+        this._fields = Arrays.stream(clazz.getDeclaredFields())
                 .filter((Field f) -> f.isAnnotationPresent(Option.class))
                 .toArray(Field[]::new);
     }
@@ -118,15 +110,15 @@ public class Parser {
         try {
             String strVal = getValue(op, field.get(_instance));
             // String check is not needed because values are stored as Strings
-            Optional<Converter> c = _converters.stream()
-                    .filter(converter -> clazz == converter.getConvertClass())
-                    .findFirst();
 
-            if (c.isPresent()) {
-                field.set(_instance, c.get().convert(strVal));
-            }
+            Object converted = _converters.convert(clazz, strVal);
+            System.out.println("converted " + field + " " + converted);
+            field.set(_instance, converted);
+            System.out.println(field.get(_instance));
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
+        } catch (IllegalArgumentException e) {
+            System.err.println("accessing instance var from static Class");
         } finally {
             // revert back to original accessible state
             field.setAccessible(accessible);
@@ -134,8 +126,8 @@ public class Parser {
     }
 
     private String getValue(Option op, Object defaultVal) {
-        if (_shorts.containsKey(op.shortOpt())) {
-            defaultVal = _shorts.get(op.shortOpt());
+        if (_shorts.containsKey(String.valueOf(op.shortOpt()))) {
+            defaultVal = _shorts.get(String.valueOf(op.shortOpt()));
         }
 
         if (_longs.containsKey(op.longOpt())) {
@@ -145,12 +137,24 @@ public class Parser {
         return String.valueOf(defaultVal);
     }
 
+    /**
+     * Parse args with default config and converters
+     *
+     * @param instance
+     * @param args
+     */
     public static void parseArgs(Object instance, String[] args) {
-        new Parser(instance, null).parse(args);
+        new Parser(instance).parse(args);
     }
 
-    public void setOnExit(boolean onExit) {
-        this._exit = onExit;
+    /**
+     * Parse args with default config and converters
+     *
+     * @param instance
+     * @param args
+     */
+    public static void parseArgs(Class instance, String[] args) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        new Parser(instance).parse(args);
     }
 
     public static class Builder {
@@ -174,8 +178,12 @@ public class Parser {
         }
 
         public Parser build() {
-            Parser p = new Parser(_instance, _converters);
-            p.setOnExit(_exit);
+            Parser p = new Parser(_instance);
+            if (_converters != null) {
+                p._converters.addAll(_converters);
+            }
+
+            p._exit = _exit;
             return p;
         }
     }

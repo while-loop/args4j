@@ -1,5 +1,6 @@
 package com.github.whileloop.args4j.converter;
 
+import com.github.whileloop.args4j.ConvertFactory;
 import com.github.whileloop.args4j.Converter;
 
 import java.io.File;
@@ -11,25 +12,25 @@ import java.util.List;
 public final class FileConverters {
     static final Converter<File> FILE_CONVERTER = new Converter<File>() {
         @Override
-        public File convert(String value) {
+        public File convert(ConvertFactory factory, Class<File> enclosingClass, String value) {
             return new File(value);
         }
 
         @Override
-        public Class<File> getConvertClass() {
-            return File.class;
+        public Class[] getConvertClass() {
+            return new Class[]{File.class};
         }
     };
 
     static final Converter<Path> PATH_CONVERTER = new Converter<Path>() {
         @Override
-        public Path convert(String value) {
+        public Path convert(ConvertFactory factory, Class<Path> enclosingClass, String value) {
             return Paths.get(value);
         }
 
         @Override
-        public Class<Path> getConvertClass() {
-            return Path.class;
+        public Class[] getConvertClass() {
+            return new Class[]{Path.class};
         }
     };
 

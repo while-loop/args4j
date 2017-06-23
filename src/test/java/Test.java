@@ -1,12 +1,15 @@
+import com.github.whileloop.args4j.ConvertFactory;
 import com.github.whileloop.args4j.Converter;
 import com.github.whileloop.args4j.Parser;
 import com.github.whileloop.args4j.annotation.Option;
 import com.github.whileloop.args4j.annotation.Program;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 
 @Program(name = "Test",
         usage = "[options...] command")
@@ -18,7 +21,7 @@ public class Test {
     @Option(longOpt = "outFile", shortOpt = 'o', desc = "log output file")
     private  File outFile;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         Test t = new Test();
 
         Parser.parseArgs(Test.class, args); // static fields
@@ -38,15 +41,15 @@ public class Test {
                      * @return
                      */
                     @Override
-                    public Map<String, Object> convert(String value) {
+                    public Map<String, Object> convert(ConvertFactory factory,Class<Map> enclosingClass, String value) {
                         return Arrays.stream(value.split(","))
                                 .map(s -> s.split(":"))
                                 .collect(Collectors.toMap(e -> e[0], e -> e[1]));
                     }
 
                     @Override
-                    public Class<Map> getConvertClass() {
-                        return Map.class;
+                    public Class[] getConvertClass() {
+                        return new Class[]{Map.class};
                     }
                 })
                 .build();
