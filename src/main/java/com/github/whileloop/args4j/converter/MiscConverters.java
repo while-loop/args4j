@@ -3,22 +3,33 @@ package com.github.whileloop.args4j.converter;
 import com.github.whileloop.args4j.ConvertFactory;
 import com.github.whileloop.args4j.Converter;
 
+import java.lang.reflect.Array;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
 public class MiscConverters {
 
-    static final Converter<? extends Object[]> ARRAY_CONVERTER = new Converter<Object[]>() {
+    static final Converter<? extends Object> ARRAY_CONVERTER = new Converter<Object>() {
         @Override
-        public Object[] convert(ConvertFactory factory, Class<Object[]> clazz, String value) {
+        public Object convert(ConvertFactory factory, Class<Object> clazz, String value) {
+            Class componentClass = clazz.getComponentType();
             System.out.println("IM HERE");
             String[] tokens = value.split(",");
-            Object[] c = Arrays.stream(tokens)
-                    .map(token -> factory.convert(clazz.getComponentType(), token))
-                    .toArray();
-            return c;
+
+            List<Object> list = new ArrayList<>();
+            for (String token: tokens) {
+                list.add(factory.convert(componentClass, token));
+            }
+
+            int size = list.size();
+            Object array = Array.newInstance(componentClass, size);
+            for (int i = 0; i < size; i++) {
+                Array.set(array, i, list.get(i));
+            }
+            return array;
         }
 
         @Override
