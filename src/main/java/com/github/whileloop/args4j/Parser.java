@@ -114,11 +114,9 @@ public class Parser {
             // String check is not needed because values are stored as Strings
 
             Object converted = _converters.convert(type, strVal);
-            System.out.println("converted " + field + " " + converted);
             field.set(_instance, converted);
-            System.out.println(field.get(_instance));
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            System.err.println("accessing static final var from static Class: " + e.getMessage());
         } catch (IllegalArgumentException e) {
             System.err.println("accessing instance var from static Class: " + e.getMessage());
         } finally {

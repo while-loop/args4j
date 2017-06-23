@@ -23,7 +23,7 @@ public class IntegrationTest {
         private static String iface = "eth1";
 
         @Option(longOpt = "outFile", shortOpt = 'o', desc = "log output file")
-        private File outFile;
+        private final File outFile = null;
 
         @Option(longOpt = "timeout", shortOpt = 't', desc = "log output file")
         private int timeout;

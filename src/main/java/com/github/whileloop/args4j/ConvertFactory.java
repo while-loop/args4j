@@ -18,20 +18,6 @@ public class ConvertFactory {
         }
     }
 
-    /**
-     * @param clazz
-     * @param value
-     * @return
-     * @deprecated use {@link #convert(Type, String)}
-     */
-    public Object convert(Class clazz, String value) {
-        if (_converters.containsKey(clazz)) {
-            return _converters.get(clazz).convert(this, clazz, value);
-        }
-
-        return null;
-    }
-
     public Object convert(Type type, String value) {
         Type tt = type;
         if (type instanceof ParameterizedType){
