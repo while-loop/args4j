@@ -85,6 +85,9 @@ public final class PrimitiveConverters {
     static final Converter<Character> CHARACTER_CONVERTER = new Converter<Character>() {
         @Override
         public Character convert(ConvertFactory factory, Type type, String value) {
+            if (value == null || value.length() != 1) {
+                throw new IllegalArgumentException("value given is not length 1");
+            }
             return value.charAt(0);
         }
 

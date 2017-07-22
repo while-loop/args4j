@@ -23,7 +23,7 @@ public class ConvertFactory {
         addAll(Arrays.asList(converters));
     }
 
-    public  <T extends Object> T convert(Type type, String value) {
+    public  <T> T convert(Type type, String value) {
         Type tt = type;
         if (type instanceof ParameterizedType){
             tt = ((ParameterizedType)type).getRawType();
