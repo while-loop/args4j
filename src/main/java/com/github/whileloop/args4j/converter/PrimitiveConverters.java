@@ -17,7 +17,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{String.class};
         }
     };
@@ -29,7 +29,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{Integer.class, int.class};
         }
     };
@@ -41,7 +41,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{Short.class, short.class};
         }
     };
@@ -53,7 +53,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{double.class, Double.class};
         }
     };
@@ -65,7 +65,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{boolean.class, Boolean.class};
         }
     };
@@ -77,7 +77,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{Long.class, long.class};
         }
     };
@@ -89,7 +89,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{Character.class, char.class};
         }
     };
@@ -101,7 +101,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{float.class, Float.class};
         }
     };
@@ -113,7 +113,7 @@ public final class PrimitiveConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{byte.class, Byte.class};
         }
     };

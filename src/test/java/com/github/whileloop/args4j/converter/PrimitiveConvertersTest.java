@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class PrimitiveConvertersTest {
     @Test
     public void testStringConverter() {
-        assertArrayEquals(new Class[]{String.class}, PrimitiveConverters.STRING_CONVERTER.getConvertClass());
+        assertArrayEquals(new Class[]{String.class}, PrimitiveConverters.STRING_CONVERTER.getType());
         assertEquals("testing", PrimitiveConverters.STRING_CONVERTER.convert(null,null, "testing"));
         assertEquals("", PrimitiveConverters.STRING_CONVERTER.convert(null,null, ""));
         assertEquals(null, PrimitiveConverters.STRING_CONVERTER.convert(null,null, null));
@@ -15,7 +15,7 @@ public class PrimitiveConvertersTest {
 
     @Test
     public void testIntegerConverter() {
-        assertArrayEquals(new Class[]{Integer.class, int.class}, PrimitiveConverters.INTEGER_CONVERTER.getConvertClass());
+        assertArrayEquals(new Class[]{Integer.class, int.class}, PrimitiveConverters.INTEGER_CONVERTER.getType());
 
         assertEquals(3, (int) PrimitiveConverters.INTEGER_CONVERTER.convert(null,null, "3"));
         assertEquals(new Integer(-1), PrimitiveConverters.INTEGER_CONVERTER.convert(null,null, "-1"));
@@ -37,7 +37,7 @@ public class PrimitiveConvertersTest {
 
     @Test
     public void testDoubleConverter() {
-        assertArrayEquals(new Class[]{double.class, Double.class}, PrimitiveConverters.DOUBLE_CONVERTER.getConvertClass());
+        assertArrayEquals(new Class[]{double.class, Double.class}, PrimitiveConverters.DOUBLE_CONVERTER.getType());
 
         assertEquals(3.2, PrimitiveConverters.DOUBLE_CONVERTER.convert(null,null, "3.2"), 0.01);
         assertEquals(new Double(-1.0), PrimitiveConverters.DOUBLE_CONVERTER.convert(null,null, "-1"));
@@ -59,7 +59,7 @@ public class PrimitiveConvertersTest {
 
     @Test
     public void testFloatConverter() {
-        assertArrayEquals(new Class[]{float.class, Float.class}, PrimitiveConverters.FLOAT_CONVERTER.getConvertClass());
+        assertArrayEquals(new Class[]{float.class, Float.class}, PrimitiveConverters.FLOAT_CONVERTER.getType());
 
         assertEquals(3.2, PrimitiveConverters.FLOAT_CONVERTER.convert(null,null, "3.2"), 0.01);
         assertEquals(new Float(-1.0), PrimitiveConverters.FLOAT_CONVERTER.convert(null,null, "-1"));
@@ -81,7 +81,7 @@ public class PrimitiveConvertersTest {
 
     @Test
     public void testShortConverter() {
-        assertArrayEquals(new Class[]{Short.class, short.class}, PrimitiveConverters.SHORT_CONVERTER.getConvertClass());
+        assertArrayEquals(new Class[]{Short.class, short.class}, PrimitiveConverters.SHORT_CONVERTER.getType());
 
         assertEquals(32767, PrimitiveConverters.SHORT_CONVERTER.convert(null,null, "32767"), 0.01);
         assertEquals(new Short((short) -654), PrimitiveConverters.SHORT_CONVERTER.convert(null,null, "-654"));
@@ -103,7 +103,7 @@ public class PrimitiveConvertersTest {
 
     @Test
     public void testBooleanConverter() {
-        assertArrayEquals(new Class[]{boolean.class, Boolean.class}, PrimitiveConverters.BOOLEAN_CONVERTER.getConvertClass());
+        assertArrayEquals(new Class[]{boolean.class, Boolean.class}, PrimitiveConverters.BOOLEAN_CONVERTER.getType());
 
         assertFalse(PrimitiveConverters.BOOLEAN_CONVERTER.convert(null,null, "false"));
         assertFalse(PrimitiveConverters.BOOLEAN_CONVERTER.convert(null,null, ""));

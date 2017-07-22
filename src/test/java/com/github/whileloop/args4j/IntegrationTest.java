@@ -44,7 +44,6 @@ public class IntegrationTest {
         assertEquals("eth2", TestClass.iface);
 
         TestClass t = new TestClass();
-        assertEquals("eth2", t.iface);
         Parser.parseArgs(t, "-o out.log -p 80,93,23 -t 50 -a google.com,facebook.com,anthonyalves.science -f /path/to/a.html,a.html,/no/file.log".split(" "));
         assertEquals("out.log", t.outFile.toString());
         assertEquals("eth2", t.iface);

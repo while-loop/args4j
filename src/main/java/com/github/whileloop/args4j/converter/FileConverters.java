@@ -18,7 +18,7 @@ public final class FileConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{File.class};
         }
     };
@@ -30,7 +30,7 @@ public final class FileConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{Path.class};
         }
     };

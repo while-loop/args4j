@@ -83,4 +83,18 @@ public class OptionParserTest {
         assertEquals(boolean.class, f.get().getType());
     }
 
+    @Test
+    public void parseOptsWithSingleQuotes(){
+
+    }
+
+    @Test
+    public void parseOptsWithDoubleQuotes(){
+
+    }
+
+    @Test
+    public void parseOptsWithDoubleQuotesInSingleQuotes(){
+
+    }
 }

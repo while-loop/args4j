@@ -34,7 +34,7 @@ public class MiscConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{Object[].class,
                     int[].class, double[].class,
                     float[].class, short[].class,
@@ -66,7 +66,7 @@ public class MiscConverters {
         }
 
         @Override
-        public Class<?>[] getConvertClass() {
+        public Class<?>[] getType() {
             return new Class[]{List.class};
         }
     }
@@ -89,7 +89,7 @@ public class MiscConverters {
 //        }
 //
 //        @Override
-//        public Class[] getConvertClass() {
+//        public Class[] getType() {
 //            return new Class[]{List.class};
 //        }
 //};
@@ -115,7 +115,7 @@ public class MiscConverters {
         }
 
         @Override
-        public Class[] getConvertClass() {
+        public Class[] getType() {
             return new Class[]{InetSocketAddress.class};
         }
     };

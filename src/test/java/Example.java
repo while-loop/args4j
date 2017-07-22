@@ -49,7 +49,7 @@ public class Example {
                     }
 
                     @Override
-                    public Class[] getConvertClass() {
+                    public Class[] getType() {
                         return new Class[]{Map.class};
                     }
                 })
